@@ -3,7 +3,7 @@ Script to automate camera renders in Blender
 Lisa Fung
 11/29/2024
 
-Blend file: "./automate_camera_dice.blend"
+Blend file: "./automate_camera_dice.blend", "glass_sculpture_v2.blend"
 Goal: automatically render *video* with different camera orientations 
     Produce baseline drone path: camera moves in horizontal circle with specific radius and height, 
         camera angle always facing origin, specify radian angle to increment, total number of images
@@ -15,8 +15,8 @@ import os
 
 # Variables to change for each Blender scene
 output_path = "C:\\Users\\lisaf\\Documents\\2stanford_year2\\1autumn2024\\CS238\\Final Project\\cs238-nerf-drone-path-planning\\dev_automate_camera_outputs"
-camera_xy_radius = 50
-camera_z = 37
+camera_xy_radius = 14
+camera_z = 0.5
 # total_images = 10
 # angle_increment = 2 * math.pi / total_images
 
@@ -52,7 +52,7 @@ bpy.context.scene.render.fps = 24
 
 # Set the start and end frames for the animation
 bpy.context.scene.frame_start = 1
-bpy.context.scene.frame_end = 50
+bpy.context.scene.frame_end = 10
 
 # Create the camera motion (circle around the sphere)
 num_frames = bpy.context.scene.frame_end - bpy.context.scene.frame_start + 1
@@ -72,7 +72,7 @@ for frame in range(bpy.context.scene.frame_start, bpy.context.scene.frame_end + 
     camera.keyframe_insert(data_path="rotation_euler", frame=frame)
 
 # Set the output file name
-output_filename = f"{output_path}/circle_dice_r{camera_xy_radius}_z{camera_z}_f{num_frames}.mp4"
+output_filename = f"{output_path}/circle_sculpture_r{camera_xy_radius}_z{camera_z}_f{num_frames}.mp4"
 bpy.context.scene.render.filepath = output_filename
 
 # Set the render engine
